@@ -1,3 +1,7 @@
+run infra with docker-compose
+```bash
+make infra
+```
 
 migrate the database
 ```bash
