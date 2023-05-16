@@ -17,3 +17,9 @@ run the api
 ```bash
 go run main.go gateway start
 ```
+
+
+
+publish "event" {data}
+
+pubish "message#userid1"

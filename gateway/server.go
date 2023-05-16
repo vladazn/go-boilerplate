@@ -60,6 +60,16 @@ func NewServer(config *GatewayServerConfig, jwtGenerator *jwt.JwtGenerator) (*Ga
 		return nil, err
 	}
 
+	err = frontoffice.RegisterPartyServiceHandlerFromEndpoint(
+		context.TODO(),
+		mux,
+		config.Services.UserService,
+		opts,
+	)
+	if err != nil {
+		return nil, err
+	}
+
 	handler := cors.AllowAll().Handler(mux)
 
 	return &GatewayServer{

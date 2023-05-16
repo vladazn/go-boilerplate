@@ -9,6 +9,9 @@
       "name": "AuthService"
     },
     {
+      "name": "PartyService"
+    },
+    {
       "name": "UserService"
     }
   ],
@@ -48,6 +51,38 @@
         ],
         "tags": [
           "AuthService"
+        ]
+      }
+    },
+    "/core/party/create": {
+      "post": {
+        "operationId": "PartyService_CreateParty",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/boilerplateCreatePartyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/boilerplateCreatePartyRequest"
+            }
+          }
+        ],
+        "tags": [
+          "PartyService"
         ]
       }
     },
@@ -126,9 +161,6 @@
       "properties": {
         "accessToken": {
           "type": "string"
-        },
-        "refreshToken": {
-          "type": "string"
         }
       }
     },
@@ -141,6 +173,12 @@
         "2"
       ],
       "default": "0"
+    },
+    "boilerplateCreatePartyRequest": {
+      "type": "object"
+    },
+    "boilerplateCreatePartyResponse": {
+      "type": "object"
     },
     "boilerplateGetUserInfoResponse": {
       "type": "object",
@@ -162,6 +200,9 @@
       "type": "object"
     },
     "boilerplateSetUsernameResponse": {
+      "type": "object"
+    },
+    "boilerplateUpdateAvatarResponse": {
       "type": "object"
     },
     "boilerplateUserInfo": {

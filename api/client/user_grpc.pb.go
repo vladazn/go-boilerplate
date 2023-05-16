@@ -25,6 +25,7 @@ type UserServiceClient interface {
 	GetUserInfo(ctx context.Context, in *GetUserInfoRequest, opts ...grpc.CallOption) (*GetUserInfoResponse, error)
 	SetUsername(ctx context.Context, in *SetUsernameRequest, opts ...grpc.CallOption) (*SetUsernameResponse, error)
 	SetUserSettings(ctx context.Context, in *SetUserSettingsRequest, opts ...grpc.CallOption) (*SetUserSettingsResponse, error)
+	UpdateAvatar(ctx context.Context, in *UpdateAvatarRequest, opts ...grpc.CallOption) (*UpdateAvatarResponse, error)
 }
 
 type userServiceClient struct {
@@ -62,6 +63,15 @@ func (c *userServiceClient) SetUserSettings(ctx context.Context, in *SetUserSett
 	return out, nil
 }
 
+func (c *userServiceClient) UpdateAvatar(ctx context.Context, in *UpdateAvatarRequest, opts ...grpc.CallOption) (*UpdateAvatarResponse, error) {
+	out := new(UpdateAvatarResponse)
+	err := c.cc.Invoke(ctx, "/boilerplate.UserService/UpdateAvatar", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServiceServer is the server API for UserService service.
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility
@@ -69,6 +79,7 @@ type UserServiceServer interface {
 	GetUserInfo(context.Context, *GetUserInfoRequest) (*GetUserInfoResponse, error)
 	SetUsername(context.Context, *SetUsernameRequest) (*SetUsernameResponse, error)
 	SetUserSettings(context.Context, *SetUserSettingsRequest) (*SetUserSettingsResponse, error)
+	UpdateAvatar(context.Context, *UpdateAvatarRequest) (*UpdateAvatarResponse, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -84,6 +95,9 @@ func (UnimplementedUserServiceServer) SetUsername(context.Context, *SetUsernameR
 }
 func (UnimplementedUserServiceServer) SetUserSettings(context.Context, *SetUserSettingsRequest) (*SetUserSettingsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetUserSettings not implemented")
+}
+func (UnimplementedUserServiceServer) UpdateAvatar(context.Context, *UpdateAvatarRequest) (*UpdateAvatarResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAvatar not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
 
@@ -152,6 +166,24 @@ func _UserService_SetUserSettings_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_UpdateAvatar_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAvatarRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UpdateAvatar(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/boilerplate.UserService/UpdateAvatar",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UpdateAvatar(ctx, req.(*UpdateAvatarRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -170,6 +202,10 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SetUserSettings",
 			Handler:    _UserService_SetUserSettings_Handler,
+		},
+		{
+			MethodName: "UpdateAvatar",
+			Handler:    _UserService_UpdateAvatar_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

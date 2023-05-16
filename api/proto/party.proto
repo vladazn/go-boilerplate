@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package boilerplate;
+
+option go_package = "github.com/vladazn/go-boilerplate/api/client;frontoffice";
+
+service PartyService {
+  rpc CreateParty(CreatePartyRequest) returns (CreatePartyResponse);
+  rpc GatMyParties(GatMyPartiesRequest) returns (GatMyPartiesResponse);
+}
+
+message GatMyPartiesRequest{
+
+}
+
+message GatMyPartiesResponse{
+
+}
+
+
+message CreatePartyRequest {
+    string party_name = 1;
+}
+
+message CreatePartyResponse {
+  string party_id = 1;
+}

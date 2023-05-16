@@ -8,7 +8,14 @@ service UserService {
   rpc GetUserInfo(GetUserInfoRequest) returns (GetUserInfoResponse) {}
   rpc SetUsername(SetUsernameRequest) returns (SetUsernameResponse) {}
   rpc SetUserSettings(SetUserSettingsRequest) returns (SetUserSettingsResponse) {}
+  rpc UpdateAvatar(UpdateAvatarRequest) returns (UpdateAvatarResponse) {}
 }
+
+message UpdateAvatarRequest{
+
+}
+
+message UpdateAvatarResponse {}
 
 message UserInfo {
   string user_id = 1;

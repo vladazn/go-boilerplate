@@ -19,6 +19,7 @@ func NewServer(
 	config *GrpcServerConfigs,
 	authHandler *grpchandler.AuthHandler,
 	userHandler *grpchandler.UserHandler,
+	partyHandler *grpchandler.PartyHandler,
 ) *Server {
 	server := &Server{
 		address: config.Address(),
@@ -34,6 +35,7 @@ func NewServer(
 
 	server.grpcServer.RegisterService(&frontoffice.AuthService_ServiceDesc, authHandler)
 	server.grpcServer.RegisterService(&frontoffice.UserService_ServiceDesc, userHandler)
+	server.grpcServer.RegisterService(&frontoffice.PartyService_ServiceDesc, partyHandler)
 
 	reflection.Register(server.grpcServer)
 

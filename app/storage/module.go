@@ -8,6 +8,7 @@ func Module() fx.Option {
 			NewUserRepository,
 			//user additional data
 			NewUserSettingsRepository,
+			NewPartyRepository,
 		),
 	)
 }
