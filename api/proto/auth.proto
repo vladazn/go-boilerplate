@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package  boilerplate;
+
+option go_package = "github.com/vladazn/go-boilerplate/api/client;frontoffice";
+
+import "google/protobuf/wrappers.proto";
+
+service AuthService {
+  rpc Auth(AuthRequest) returns (AuthResponse) {}
+}
+
+enum AuthType {
+  AUTH_TYPE_NONE = 0;
+  AUTH_TYPE_GOOGLE = 1;
+  AUTH_TYPE_APPLE = 2;
+}
+
+message AuthRequest {
+  string key = 1;
+  AuthType auth_type = 2;
+  google.protobuf.StringValue username = 3;
+}
+
+message AuthResponse {
+  string accessToken = 1;
+}

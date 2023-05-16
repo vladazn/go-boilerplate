@@ -1,0 +1,26 @@
+openapiOptions:
+  file:
+    - file: "auth.proto"
+      option:
+        securityDefinitions:
+          security:
+            ApiKeyAuth:
+              type: TYPE_API_KEY
+              name: x-auth-token
+              in: IN_HEADER
+        security:
+          - securityRequirement:
+              ApiKeyAuth: {}
+    - file: "user.proto"
+      option:
+        securityDefinitions:
+          security:
+            ApiKeyAuth:
+              type: TYPE_API_KEY
+              name: x-auth-token
+              in: IN_HEADER
+        security:
+          - securityRequirement:
+              ApiKeyAuth: {}
+  service:
+    - service: boilerplate.AuthService

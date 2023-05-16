@@ -1,0 +1,15 @@
+type: google.api.Service
+config_version: 3
+
+http:
+  rules:
+#     auth
+    - selector: boilerplate.AuthService.Auth
+      post: /core/auth/auth
+      body: "*"
+#     user
+    - selector: boilerplate.UserService.GetUserInfo
+      get: /core/user/info
+    - selector: boilerplate.UserService.SetUserSettings
+      post: /core/user/settings
+      body: "*"

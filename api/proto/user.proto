@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package boilerplate;
+
+option go_package = "github.com/vladazn/go-boilerplate/api/client;frontoffice";
+
+service UserService {
+  rpc GetUserInfo(GetUserInfoRequest) returns (GetUserInfoResponse) {}
+  rpc SetUsername(SetUsernameRequest) returns (SetUsernameResponse) {}
+  rpc SetUserSettings(SetUserSettingsRequest) returns (SetUserSettingsResponse) {}
+}
+
+message UserInfo {
+  string user_id = 1;
+  string username = 2;
+  UserSettings settings = 3;
+}
+
+message UserSettings {
+  bool is_sound_enabled = 1;
+  bool is_music_enabled = 2;
+  bool is_left_handed_enabled = 3;
+}
+
+
+message SetUserSettingsRequest {
+  UserSettings settings = 1;
+}
+message SetUserSettingsResponse {}
+
+message GetUserInfoRequest {}
+
+message GetUserInfoResponse {
+  UserInfo info = 1;
+}
+
+message SetUsernameRequest {
+  string username = 1;
+}
+
+message SetUsernameResponse {}
